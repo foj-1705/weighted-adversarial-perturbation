@@ -51,7 +51,6 @@ def at_loss_initial(model,
                 perturb_steps=10,
                 beta=1.0,
                 distance='l_inf'):
-    # define KL-loss
     
     model.eval()
     batch_size = len(x_natural)
