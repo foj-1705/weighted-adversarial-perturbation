@@ -126,11 +126,7 @@ def train(args, model, device, train_loader, optimizer, epoch):
                            epsilon=args.epsilon,
                            perturb_steps=args.num_steps,
                            beta=args.beta)
-                           #method=args.method)
-                           #distance='l_inf',
-                           #method='at')
-            
-       
+                   
         
         loss.backward()
         torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
