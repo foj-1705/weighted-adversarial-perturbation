@@ -12,19 +12,19 @@ from easydict import EasyDict
 import numpy as np
 import matplotlib.pyplot as plt
 
-#from wideresnet import *
+from wideresnet import *
 #from resnet import *
-#from mart import mart_loss
+from losses import*
 import numpy as np
 import time
 
 os.environ["CUDA_VISIBLE_DEVICES"]="0"
 
 
-parser = argparse.ArgumentParser(description='PyTorch CIFAR MART Defense')
+parser = argparse.ArgumentParser(description='Weighted Perturbation Budget')
 parser.add_argument('--batch-size', type=int, default=128, metavar='N',
                     help='input batch size for training (default: 128)')
-parser.add_argument('--test-batch-size', type=int, default=100, metavar='N',
+parser.add_argument('--test-batch-size', type=int, default=128, metavar='N',
                     help='input batch size for testing (default: 100)')
 parser.add_argument('--epochs', type=int, default=120, metavar='N',
                     help='number of epochs to train')
