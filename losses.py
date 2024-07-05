@@ -132,20 +132,16 @@ def at_adapt(model,
 
             x_adv = x_adv.detach() + step * torch.sign(grad.detach())
             x_adv = torch.min(torch.max(x_adv, x_natural - epsl), x_natural + epsl) 
-            x_adv = torch.clamp(x_adv, 0.0, 1.0)
-          
+            x_adv = torch.clamp(x_adv, 0.0, 1.0)      
         
     else:
         x_adv = torch.clamp(x_adv, 0.0, 1.0)
       
-    
     model.train() 
    
     # zero gradient
     optimizer.zero_grad()
 
-
-     # mix_label
     logits = model(x_natural)
     loss_nat  = F.cross_entropy(logits, y)
     logits_adv = model(x_adv)
