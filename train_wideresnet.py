@@ -7,7 +7,7 @@ import torchvision
 import torch.optim as optim
 from torchvision import datasets, transforms
 from torch.autograd import Variable
-from easydict import EasyDict
+#from easydict import EasyDict
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -55,6 +55,7 @@ parser.add_argument('--save-freq', '-s', default=1, type=int, metavar='N',
 
 
 # settings
+args = parser.parse_args()
 model_dir = args.model
 if not os.path.exists(model_dir):
     os.makedirs(model_dir)
