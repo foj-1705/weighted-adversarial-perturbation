@@ -62,23 +62,11 @@ def at_loss_initial(model,
             with torch.enable_grad():
                 loss_ce = F.cross_entropy(model(x_adv), y)
              
-            grad = torch.autograd.grad(loss_kl, [x_adv])[0]
+            grad = torch.autograd.grad(loss_ce, [x_adv])[0]
             x_adv = x_adv.detach() + (step_size/2)   * torch.sign(grad.detach())
             x_adv = torch.min(torch.max(x_adv, x_natural - (epsilon/2)), x_natural + (epsilon/2))
             x_adv = torch.clamp(x_adv, 0.0, 1.0)
    
-
-        # Setup optimizers
-        optimizer_delta = optim.SGD([delta], lr=epsilon / perturb_steps * 2)
-
-        
-            optimizer_delta.step()
-
-            # projection
-            delta.data.add_(x_natural)
-            delta.data.clamp_(0, 1).sub_(x_natural)
-            delta.data.renorm_(p=2, dim=0, maxnorm=epsilon)
-        x_adv = Variable(x_natural + delta, requires_grad=False)
     else:
         x_adv = torch.clamp(x_adv, 0.0, 1.0)
     model.train()    ##Changr to train
